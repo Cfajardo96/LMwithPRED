@@ -11,3 +11,52 @@ require(tidyverse)
 require(tigerstats)
 ```
 
+We are using a liner model to predict a stimulated strength score based on arm strength or grip strength.
+
+```{r}
+dataF <- read.csv(file="http://onlinestatbook.com/case_studies_rvls/physical_strength/data.txt",sep="",header=TRUE)
+```
+
+Scatterplot SIMS is a function of ARM
+
+```{r}
+plot(SIMS~ARM,data=dataF)
+```
+
+##Now with ggplot - first select the basic data
+
+```{r}
+basicNN <- ggplot(dataF,aes(y=SIMS,x=ARM))
+```
+##Now add in scatterplot
+
+```{r}
+basicNN + geom_point()+ geom_smooth(method=lm)
+```
+
+```{r}
+model.1=lm(SIMS~ARM,data=dataF)
+summary.lm(model.1)
+```
+This Linear model of SIMS based on a ARM strength. The adjusted R-square is equal to 0.467
+
+```{r}
+plot(SIMS~GRIP,data=dataF)
+```
+
+##Now with ggplot - first select the basic data
+
+```{r}
+basicNN <- ggplot(dataF,aes(y=SIMS,x=GRIP))
+```
+##Now add in scatterplot
+
+```{r}
+basicNN + geom_point()+ geom_smooth(method=lm)
+```
+
+```{r}
+model.1=lm(SIMS~GRIP,data=dataF)
+summary.lm(model.1)
+```
+
