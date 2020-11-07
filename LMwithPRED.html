@@ -450,6 +450,10 @@ summary.lm(model.1)</code></pre>
 ## Residual standard error: 1.226 on 145 degrees of freedom
 ## Multiple R-squared:  0.4706, Adjusted R-squared:  0.467 
 ## F-statistic: 128.9 on 1 and 145 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>new=data.frame(ARM=88,GRIP=94)
+predict(model.1,new,interval=&quot;prediction&quot;)</code></pre>
+<pre><code>##         fit       lwr      upr
+## 1 0.7063836 -1.726209 3.138977</code></pre>
 <p>This Linear model of SIMS based on a ARM strength. The adjusted R-square is equal to 0.467</p>
 </div>
 <div id="model2" class="section level1">
@@ -483,6 +487,50 @@ summary.lm(model.2)</code></pre>
 ## Residual standard error: 1.295 on 145 degrees of freedom
 ## Multiple R-squared:  0.4094, Adjusted R-squared:  0.4053 
 ## F-statistic: 100.5 on 1 and 145 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>predict(model.2,new,interval=&quot;prediction&quot;)</code></pre>
+<pre><code>##          fit       lwr      upr
+## 1 -0.5361543 -3.107961 2.035652</code></pre>
+<p>This is a linear model of SIMS based on GRIP strength. The adjusted R-square is equal to 0.4053. In this case model 1 is better than model 2 because the bigger R-squared.</p>
+</div>
+<div id="model-3" class="section level1">
+<h1>model 3</h1>
+<p>SIMS is a function of GRIP and ARM strength</p>
+<pre class="r"><code>model.3=lm(SIMS~GRIP + ARM,data=dataF)
+summary.lm(model.3)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = SIMS ~ GRIP + ARM, data = dataF)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.1846 -0.7380 -0.0641  0.7394  2.8634 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -5.433871   0.461815 -11.766  &lt; 2e-16 ***
+## GRIP         0.024470   0.005158   4.744 4.99e-06 ***
+## ARM          0.037311   0.005774   6.462 1.50e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.144 on 144 degrees of freedom
+## Multiple R-squared:  0.5422, Adjusted R-squared:  0.5358 
+## F-statistic: 85.26 on 2 and 144 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>predict(model.3,new,interval=&quot;prediction&quot;)</code></pre>
+<pre><code>##         fit       lwr      upr
+## 1 0.1496476 -2.132373 2.431668</code></pre>
+<p>The adjusted R-square for model 3 is 0.5358 so it is bigger model based on ARM</p>
+<pre class="r"><code>anova(model.1,model.3)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: SIMS ~ ARM
+## Model 2: SIMS ~ GRIP + ARM
+##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1    145 217.88                                  
+## 2    144 188.43  1     29.45 22.506 4.994e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The P value is 0.00000499 this is less than 0.05 so we reject the null hypothesis and conclude that model 3 is better than model 1.</p>
 </div>
 
 
