@@ -17,6 +17,8 @@ We are using a liner model to predict a stimulated strength score based on arm s
 dataF <- read.csv(file="http://onlinestatbook.com/case_studies_rvls/physical_strength/data.txt",sep="",header=TRUE)
 ```
 
+# model1
+
 Scatterplot SIMS is a function of ARM
 
 ```{r}
@@ -40,6 +42,10 @@ summary.lm(model.1)
 ```
 This Linear model of SIMS based on a ARM strength. The adjusted R-square is equal to 0.467
 
+# model2
+
+Scatterplot SIMS is a function of GRIP
+
 ```{r}
 plot(SIMS~GRIP,data=dataF)
 ```
@@ -56,7 +62,7 @@ basicNN + geom_point()+ geom_smooth(method=lm)
 ```
 
 ```{r}
-model.1=lm(SIMS~GRIP,data=dataF)
-summary.lm(model.1)
+model.2=lm(SIMS~GRIP,data=dataF)
+summary.lm(model.2)
 ```
 
